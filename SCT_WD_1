@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Color Changing Page</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: Arial, sans-serif;
+      transition: background-color 0.5s ease, color 0.5s ease;
+    }
+
+    body {
+      display: flex;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 200px;
+      background-color: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding-top: 40px;
+      z-index: 1000;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    nav ul li {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      display: block;
+      padding: 10px;
+      transition: background-color 0.3s;
+    }
+
+    nav ul li a:hover {
+      background-color: #777;
+    }
+
+    .content {
+      margin-left: 200px;
+      padding: 40px;
+      flex: 1;
+      transition: color 0.5s ease;
+    }
+
+    section {
+      height: 120vh;
+      border-bottom: 1px solid #ccc;
+    }
+
+    h1 {
+      font-size: 36px;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        width: 150px;
+      }
+      .content {
+        margin-left: 150px;
+      }
+    }
+
+    @media (max-width: 500px) {
+      nav {
+        width: 120px;
+        padding-top: 20px;
+      }
+      nav ul li {
+        margin: 10px 0;
+      }
+      .content {
+        margin-left: 120px;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="content" id="content">
+    <section id="home">
+      <h1>Home</h1>
+      <p>Welcome to our website. We provide modern solutions for your digital needs.</p>
+    </section>
+    <section id="about">
+      <h1>About</h1>
+      <p>We are a team of passionate developers and designers building user-friendly web experiences.</p>
+    </section>
+    <section id="services">
+      <h1>Services</h1>
+      <p>Our services include web development, UI/UX design, and full-stack solutions tailored for your business.</p>
+    </section>
+    <section id="contact">
+      <h1>Contact</h1>
+      <p>Feel free to reach out via email or phone. We’re always happy to connect and discuss your project.</p>
+    </section>
+  </div>
+
+  <script>
+    // Wait until DOM is fully loaded
+    document.addEventListener("DOMContentLoaded", () => {
+      const body = document.body;
+      const content = document.getElementById("content");
+
+      const colorThemes = [
+        { bg: "#ff4d4d", text: "#ffffff" }, // red
+        { bg: "#ffa500", text: "#000000" }, // orange
+        { bg: "#ffff4d", text: "#000000" }, // yellow
+        { bg: "#4dff4d", text: "#000000" }, // green
+        { bg: "#4dd2ff", text: "#000000" }, // sky blue
+        { bg: "#4d4dff", text: "#ffffff" }, // blue
+        { bg: "#d14dff", text: "#ffffff" }, // purple
+        { bg: "#ff4da6", text: "#000000" }  // pink
+      ];
+
+      window.addEventListener("scroll", () => {
+        const scrollPosition = window.scrollY;
+        const docHeight = document.body.scrollHeight - window.innerHeight;
+        const scrollPercent = scrollPosition / docHeight;
+
+        const index = Math.floor(scrollPercent * colorThemes.length);
+        const theme = colorThemes[index] || { bg: "#ffffff", text: "#000000" };
+
+        body.style.backgroundColor = theme.bg;
+        content.style.color = theme.text;
+      });
+    });
+  </script>
+</body>
+</html>
